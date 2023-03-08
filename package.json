@@ -9,9 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.13",
+    "@heroicons/react": "^2.0.16",
     "@types/node": "18.14.6",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
+    "clsx": "^1.2.1",
     "create-react-component-folder": "^0.3.7",
     "eslint": "8.35.0",
     "eslint-config-next": "13.2.3",
@@ -31,5 +34,10 @@
     {
       "output": "src/components"
     }
-  ]
+  ],
+  "devDependencies": {
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.2.7"
+  }
 }
