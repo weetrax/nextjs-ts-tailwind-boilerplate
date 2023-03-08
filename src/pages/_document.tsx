@@ -5,12 +5,10 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head />
-      <body className="flex flex-col min-h-screen justify-between">
-        <Layout>
-          <Main />
-          <NextScript />
-        </Layout>
-      </body>
+      <div>
+        <Main />
+        <NextScript />
+      </div>
     </Html>
   );
 }
