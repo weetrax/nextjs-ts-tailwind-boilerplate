@@ -2,9 +2,14 @@ import clsx from "clsx";
 import Container from "../Container";
 import PropTypes from "prop-types";
 import React, { Fragment } from "react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  Bars3Icon,
+  MoonIcon,
+  SunIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-
+import { useTheme } from "next-themes";
 type NavbarProps = {
   //
 };
@@ -17,8 +22,14 @@ const navigation = [
 ];
 
 const Navbar: React.FC<NavbarProps> = () => {
+  const { theme, setTheme } = useTheme();
+
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
+
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure as="nav" className="bg-white dark:bg-neutral-900">
       {({ open }) => (
         <>
           <Container>
@@ -70,16 +81,27 @@ const Navbar: React.FC<NavbarProps> = () => {
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <button
                   type="button"
-                  className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  className="group p-1 transition-colors ease-in-out duration-150 focus:outline-none"
+                  onClick={toggleTheme}
                 >
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
+                  <span className="sr-only">Toggle dark mode</span>
+                  {theme === "dark" ? (
+                    <SunIcon
+                      className="h-6 w-6 group-hover:rotate-12 duration-150 transition-transform ease-in-out group-hover:fill-white"
+                      aria-hidden="true"
+                    />
+                  ) : (
+                    <MoonIcon
+                      className="h-6 w-6 group-hover:rotate-12 duration-150 transition-transform ease-in-out group-hover:fill-black"
+                      aria-hidden="true"
+                    />
+                  )}
                 </button>
 
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>
-                    <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                    <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none">
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
@@ -104,7 +126,7 @@ const Navbar: React.FC<NavbarProps> = () => {
                             href="#"
                             className={clsx(
                               active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
+                              "block px-4 py-2 text-sm"
                             )}
                           >
                             Your Profile
@@ -117,7 +139,7 @@ const Navbar: React.FC<NavbarProps> = () => {
                             href="#"
                             className={clsx(
                               active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
+                              "block px-4 py-2 text-sm"
                             )}
                           >
                             Settings
@@ -130,7 +152,7 @@ const Navbar: React.FC<NavbarProps> = () => {
                             href="#"
                             className={clsx(
                               active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
+                              "block px-4 py-2 text-sm"
                             )}
                           >
                             Sign out
