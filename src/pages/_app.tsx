@@ -6,11 +6,9 @@ import { ThemeProvider } from "next-themes";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider attribute="class">
-      <div className="bg-gray-50 dark:bg-neutral-800 text-black dark:text-white flex flex-col min-h-screen justify-between">
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </div>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </ThemeProvider>
   );
 }
