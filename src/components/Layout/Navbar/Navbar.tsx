@@ -12,14 +12,15 @@ import {
   SunIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import { routes } from "@/routes";
 
 type NavbarProps = {
   //
 };
 
 const navigation = [
-  { name: "Home", href: "/" },
-  { name: "Team", href: "/team" },
+  { name: "Home", href: routes.home },
+  { name: "Team", href: routes.team },
 ];
 
 const Navbar: React.FC<NavbarProps> = () => {
