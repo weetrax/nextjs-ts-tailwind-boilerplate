@@ -11,7 +11,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Container>
-        <div className="py-6">Home page</div>
+        <div className="py-6">Team page</div>
       </Container>
     </>
   );

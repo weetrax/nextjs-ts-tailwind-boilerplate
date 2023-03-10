@@ -1,28 +1,30 @@
 import clsx from "clsx";
 import Container from "../Container";
+import Link from "next/link";
 import PropTypes from "prop-types";
 import React, { Fragment } from "react";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { useRouter } from "next/router";
+import { useTheme } from "next-themes";
 import {
   Bars3Icon,
   MoonIcon,
   SunIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { useTheme } from "next-themes";
+
 type NavbarProps = {
   //
 };
 
 const navigation = [
-  { name: "Dashboard", href: "#", current: true },
-  { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
+  { name: "Home", href: "/" },
+  { name: "Team", href: "/team" },
 ];
 
 const Navbar: React.FC<NavbarProps> = () => {
   const { theme, setTheme } = useTheme();
+  const router = useRouter();
 
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
@@ -36,7 +38,7 @@ const Navbar: React.FC<NavbarProps> = () => {
             <div className="relative flex h-16 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
-                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                <Disclosure.Button className="inline-flex items-center justify-center focus:outline-none">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
                     <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
@@ -61,19 +63,21 @@ const Navbar: React.FC<NavbarProps> = () => {
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      <a
+                      <Link
                         key={item.name}
                         href={item.href}
                         className={clsx(
-                          item.current
-                            ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                          "rounded-md px-3 py-2 text-sm font-medium"
+                          router.pathname == item.href
+                            ? "text-primary-500"
+                            : "hover:text-primary-500",
+                          "rounded-md px-3 py-2 text-sm font-medium transition-colors duration-150 ease-in-out"
                         )}
-                        aria-current={item.current ? "page" : undefined}
+                        aria-current={
+                          router.pathname == item.href ? "page" : undefined
+                        }
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>
@@ -101,7 +105,7 @@ const Navbar: React.FC<NavbarProps> = () => {
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>
-                    <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none">
+                    <Menu.Button className="flex rounded-full text-sm focus:outline-none">
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
@@ -119,13 +123,13 @@ const Navbar: React.FC<NavbarProps> = () => {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                   >
-                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white dark:bg-neutral-800 py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <Menu.Item>
                         {({ active }) => (
                           <a
                             href="#"
                             className={clsx(
-                              active ? "bg-gray-100" : "",
+                              active ? "bg-gray-100 dark:bg-neutral-900" : "",
                               "block px-4 py-2 text-sm"
                             )}
                           >
@@ -138,7 +142,7 @@ const Navbar: React.FC<NavbarProps> = () => {
                           <a
                             href="#"
                             className={clsx(
-                              active ? "bg-gray-100" : "",
+                              active ? "bg-gray-100 dark:bg-neutral-900" : "",
                               "block px-4 py-2 text-sm"
                             )}
                           >
@@ -151,7 +155,7 @@ const Navbar: React.FC<NavbarProps> = () => {
                           <a
                             href="#"
                             className={clsx(
-                              active ? "bg-gray-100" : "",
+                              active ? "bg-gray-100 dark:bg-neutral-900" : "",
                               "block px-4 py-2 text-sm"
                             )}
                           >
@@ -171,15 +175,17 @@ const Navbar: React.FC<NavbarProps> = () => {
               {navigation.map((item) => (
                 <Disclosure.Button
                   key={item.name}
-                  as="a"
+                  as={Link}
                   href={item.href}
                   className={clsx(
-                    item.current
-                      ? "bg-gray-900 text-white"
-                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                    router.pathname == item.href
+                      ? "text-primary-500"
+                      : "hover:text-primary-500",
                     "block rounded-md px-3 py-2 text-base font-medium"
                   )}
-                  aria-current={item.current ? "page" : undefined}
+                  aria-current={
+                    router.pathname == item.href ? "page" : undefined
+                  }
                 >
                   {item.name}
                 </Disclosure.Button>
