@@ -1,6 +1,6 @@
 export const routes = {
     home: "/",
-    team: "/team"
+    portfolio: "/portfolio"
 }
 
 export const apiRoutes = {

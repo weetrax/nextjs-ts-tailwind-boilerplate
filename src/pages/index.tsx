@@ -1,7 +1,10 @@
 import Container from "@/components/Layout/Container";
 import Head from "next/head";
+import useTranslation from "next-translate/useTranslation";
 
 export default function Home() {
+  const { t } = useTranslation("common");
+
   return (
     <>
       <Head>
@@ -11,7 +14,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Container>
-        <div className="py-6">Home page</div>
+        <p>{t("Welcome_home")}</p>
       </Container>
     </>
   );

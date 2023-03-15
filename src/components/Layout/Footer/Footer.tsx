@@ -1,15 +1,12 @@
-import * as React from "react";
 import Container from "../Container";
 import PropTypes from "prop-types";
-import { useTheme } from "next-themes";
+import React from "react";
 
 type FooterProps = {
   //
 };
 
 const Footer: React.FC<FooterProps> = () => {
-  const { theme } = useTheme();
-
   return (
     <div className="bg-white dark:bg-neutral-900 py-6">
       <Container>
@@ -28,7 +25,7 @@ const Footer: React.FC<FooterProps> = () => {
                 className="w-6 h-6 cursor-pointer group-hover:-translate-y-1 duration-200 ease-in-out transition-transform"
               >
                 <path
-                  fill={theme === "dark" ? "white" : "black"}
+                  className="dark:fill-white fill-black"
                   d="M21.06 48.73h18.11V107H21.06zm9.06-29a10.5 10.5 0 11-10.5 10.49 10.5 10.5 0 0110.5-10.49M50.53 48.73h17.36v8h.24c2.42-4.58 8.32-9.41 17.13-9.41C103.6 47.28 107 59.35 107 75v32H88.89V78.65c0-6.75-.12-15.44-9.41-15.44s-10.87 7.36-10.87 15V107H50.53z"
                 ></path>
               </svg>
@@ -38,7 +35,7 @@ const Footer: React.FC<FooterProps> = () => {
                 viewBox="0 0 128 128"
                 className="w-6 h-6 cursor-pointer group-hover:-translate-y-1 duration-200 ease-in-out transition-transform"
               >
-                <g fill={theme === "dark" ? "white" : "black"}>
+                <g className="dark:fill-white fill-black">
                   <path
                     fillRule="evenodd"
                     clipRule="evenodd"

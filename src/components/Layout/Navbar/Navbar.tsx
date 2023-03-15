@@ -1,9 +1,10 @@
 import clsx from "clsx";
-import Container from "../Container";
+import Container from "@/components/Layout/Container";
 import Link from "next/link";
 import PropTypes from "prop-types";
-import React, { Fragment } from "react";
+import React, { ChangeEvent, Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { routes } from "@/routes";
 import { useRouter } from "next/router";
 import { useTheme } from "next-themes";
 import {
@@ -12,7 +13,6 @@ import {
   SunIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { routes } from "@/routes";
 
 type NavbarProps = {
   //
@@ -20,7 +20,7 @@ type NavbarProps = {
 
 const navigation = [
   { name: "Home", href: routes.home },
-  { name: "Team", href: routes.team },
+  { name: "Portfolio", href: routes.portfolio },
 ];
 
 const Navbar: React.FC<NavbarProps> = () => {
@@ -167,6 +167,9 @@ const Navbar: React.FC<NavbarProps> = () => {
                     </Menu.Items>
                   </Transition>
                 </Menu>
+                <div className="border-l ml-2">
+                  <LanguageSelector />
+                </div>
               </div>
             </div>
           </Container>
@@ -198,6 +201,26 @@ const Navbar: React.FC<NavbarProps> = () => {
     </Disclosure>
   );
 };
+
+function LanguageSelector() {
+  const router = useRouter();
+
+  const handleLanguageChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const newLocale = e.target.value;
+    router.push(router.pathname, router.asPath, { locale: newLocale });
+  };
+
+  return (
+    <select
+      className="focus:outline-none"
+      onChange={handleLanguageChange}
+      defaultValue={router.locale}
+    >
+      <option value="en">EN</option>
+      <option value="fr">FR</option>
+    </select>
+  );
+}
 
 Navbar.propTypes = {
   //

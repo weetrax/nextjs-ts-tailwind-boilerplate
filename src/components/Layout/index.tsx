@@ -1,6 +1,6 @@
-import { PropsWithChildren } from "react";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
+import { PropsWithChildren } from "react";
 
 const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
@@ -8,7 +8,7 @@ const Layout: React.FC<PropsWithChildren> = ({ children }) => {
       <header className="flex-none">
         <Navbar />
       </header>
-      <main className="flex-auto">{children}</main>
+      <main className="flex-auto py-8">{children}</main>
       <footer className="flex-none">
         <Footer />
       </footer>
