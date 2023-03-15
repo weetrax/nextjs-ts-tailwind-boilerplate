@@ -3,6 +3,7 @@ import Container from "@/components/Layout/Container";
 import Link from "next/link";
 import PropTypes from "prop-types";
 import React, { ChangeEvent, Fragment } from "react";
+import useTranslation from "next-translate/useTranslation";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { routes } from "@/routes";
 import { useRouter } from "next/router";
@@ -25,6 +26,7 @@ const navigation = [
 
 const Navbar: React.FC<NavbarProps> = () => {
   const { theme, setTheme } = useTheme();
+  const { t } = useTranslation("common");
   const router = useRouter();
 
   const toggleTheme = () => {
@@ -134,7 +136,7 @@ const Navbar: React.FC<NavbarProps> = () => {
                               "block px-4 py-2 text-sm"
                             )}
                           >
-                            Your Profile
+                            {t("My_profile")}
                           </a>
                         )}
                       </Menu.Item>
@@ -147,7 +149,7 @@ const Navbar: React.FC<NavbarProps> = () => {
                               "block px-4 py-2 text-sm"
                             )}
                           >
-                            Settings
+                            {t("Settings")}
                           </a>
                         )}
                       </Menu.Item>
@@ -160,7 +162,7 @@ const Navbar: React.FC<NavbarProps> = () => {
                               "block px-4 py-2 text-sm"
                             )}
                           >
-                            Sign out
+                            {t("Signout")}
                           </a>
                         )}
                       </Menu.Item>
@@ -212,7 +214,7 @@ function LanguageSelector() {
 
   return (
     <select
-      className="focus:outline-none"
+      className="focus:outline-none bg-transparent px-1"
       onChange={handleLanguageChange}
       defaultValue={router.locale}
     >
