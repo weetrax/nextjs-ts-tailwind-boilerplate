@@ -204,7 +204,7 @@ const Navbar: React.FC<NavbarProps> = () => {
   );
 };
 
-function LanguageSelector() {
+const LanguageSelector = () => {
   const router = useRouter();
 
   const handleLanguageChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -222,7 +222,7 @@ function LanguageSelector() {
       <option value="fr">FR</option>
     </select>
   );
-}
+};
 
 Navbar.propTypes = {
   //
