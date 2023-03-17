@@ -3,7 +3,18 @@
     "Portfolio": "Création",
     "Welcome_home": "Bienvenue sur la page Home.",
     "Portfolio_home": "Bienvenue sur la page Portfolio.",
+    "Login_home": "Bienvenue sur la page Login",
     "My_profile": "Mon profil",
     "Settings": "Paramètres",
-    "Signout": "Se déconnecter"
+    "Signout": "Se déconnecter",
+    "Login": "Se connecter",
+    "Login_description": "Connectez-vous pour profiter de toutes nos fonctionnalités !",
+    "Login_noAccount?": "Vous n'avez pas un compte ?",
+    "Email": "Adresse e-mail",
+    "Password": "Mot de passe",
+    "PasswordConfirm": "Confirmez le mot de passe",
+    "PasswordForgot?": "Mot de passe oublié ?",
+    "ChooseCountry": "Choisir un pays",
+    "NoCountriesFound": "Aucun pays trouvé",
+    "LoadingCountries": "Chargement des pays..."
   }

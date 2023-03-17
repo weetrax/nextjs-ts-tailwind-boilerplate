@@ -2,10 +2,11 @@ import clsx from "clsx";
 import Container from "@/components/Layout/Container";
 import Link from "next/link";
 import PropTypes from "prop-types";
-import React, { ChangeEvent, Fragment } from "react";
+import React, { ChangeEvent, Fragment, useState } from "react";
 import useTranslation from "next-translate/useTranslation";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { routes } from "@/routes";
+import { useCurrentUser } from "@/lib/hooks/useCurrentUser";
 import { useRouter } from "next/router";
 import { useTheme } from "next-themes";
 import {
@@ -19,20 +20,42 @@ type NavbarProps = {
   //
 };
 
-const navigation = [
+type NavbarNavigation = {
+  name: string;
+  href: string;
+  hideIfAuth?: boolean;
+};
+
+const navigation: NavbarNavigation[] = [
   { name: "Home", href: routes.home },
   { name: "Portfolio", href: routes.portfolio },
+  { name: "Login", href: routes.login, hideIfAuth: true },
+  { name: "Register", href: routes.register, hideIfAuth: true },
 ];
 
 const Navbar: React.FC<NavbarProps> = () => {
+  /* Hooks */
   const { theme, setTheme } = useTheme();
-  const { t } = useTranslation("common");
   const router = useRouter();
+  const { user, logout } = useCurrentUser();
+  const { t } = useTranslation("common");
 
+  /* States */
+  const [logoutLoading, setLogoutLoading] = useState<boolean>(false);
+
+  /* Functions */
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
 
+  const handleLogout = () => {
+    setLogoutLoading(true);
+    logout((err) => {
+      setLogoutLoading(false);
+    });
+  };
+
+  /* Render */
   return (
     <Disclosure as="nav" className="bg-white dark:bg-neutral-900">
       {({ open }) => (
@@ -65,23 +88,26 @@ const Navbar: React.FC<NavbarProps> = () => {
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
-                    {navigation.map((item) => (
-                      <Link
-                        key={item.name}
-                        href={item.href}
-                        className={clsx(
-                          router.pathname == item.href
-                            ? "text-primary-500"
-                            : "hover:text-primary-500",
-                          "rounded-md px-3 py-2 text-sm font-medium transition-colors duration-150 ease-in-out"
-                        )}
-                        aria-current={
-                          router.pathname == item.href ? "page" : undefined
-                        }
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
+                    {navigation.map(
+                      (item) =>
+                        ((user && !item.hideIfAuth) || !user) && (
+                          <Link
+                            key={item.name}
+                            href={item.href}
+                            className={clsx(
+                              router.pathname == item.href
+                                ? "text-primary-500"
+                                : "hover:text-primary-500",
+                              "rounded-md px-3 py-2 text-sm font-medium transition-colors duration-150 ease-in-out"
+                            )}
+                            aria-current={
+                              router.pathname == item.href ? "page" : undefined
+                            }
+                          >
+                            {item.name}
+                          </Link>
+                        )
+                    )}
                   </div>
                 </div>
               </div>
@@ -106,69 +132,45 @@ const Navbar: React.FC<NavbarProps> = () => {
                 </button>
 
                 {/* Profile dropdown */}
-                <Menu as="div" className="relative ml-3">
-                  <div>
-                    <Menu.Button className="flex rounded-full text-sm focus:outline-none">
-                      <span className="sr-only">Open user menu</span>
-                      <img
-                        className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                      />
-                    </Menu.Button>
-                  </div>
-                  <Transition
-                    as={Fragment}
-                    enter="transition ease-out duration-100"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-in duration-75"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
-                  >
-                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white dark:bg-neutral-800 py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={clsx(
-                              active ? "bg-gray-100 dark:bg-neutral-900" : "",
-                              "block px-4 py-2 text-sm"
-                            )}
-                          >
-                            {t("My_profile")}
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={clsx(
-                              active ? "bg-gray-100 dark:bg-neutral-900" : "",
-                              "block px-4 py-2 text-sm"
-                            )}
-                          >
-                            {t("Settings")}
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={clsx(
-                              active ? "bg-gray-100 dark:bg-neutral-900" : "",
-                              "block px-4 py-2 text-sm"
-                            )}
-                          >
-                            {t("Signout")}
-                          </a>
-                        )}
-                      </Menu.Item>
-                    </Menu.Items>
-                  </Transition>
-                </Menu>
+                {user && (
+                  <Menu as="div" className="relative ml-3">
+                    <div>
+                      <Menu.Button className="flex rounded-full text-sm focus:outline-none">
+                        <span className="sr-only">Open user menu</span>
+                        <img
+                          className="h-8 w-8 rounded-full"
+                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                          alt=""
+                        />
+                      </Menu.Button>
+                    </div>
+                    <Transition
+                      as={Fragment}
+                      enter="transition ease-out duration-100"
+                      enterFrom="transform opacity-0 scale-95"
+                      enterTo="transform opacity-100 scale-100"
+                      leave="transition ease-in duration-75"
+                      leaveFrom="transform opacity-100 scale-100"
+                      leaveTo="transform opacity-0 scale-95"
+                    >
+                      <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white dark:bg-neutral-800 py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <Menu.Item>
+                          {({ active }) => (
+                            <button
+                              onClick={handleLogout}
+                              className={clsx(
+                                active ? "bg-gray-100 dark:bg-neutral-900" : "",
+                                "block px-4 py-2 text-sm w-full text-left"
+                              )}
+                            >
+                              {t("Logout")}
+                            </button>
+                          )}
+                        </Menu.Item>
+                      </Menu.Items>
+                    </Transition>
+                  </Menu>
+                )}
                 <div className="border-l ml-2">
                   <LanguageSelector />
                 </div>
@@ -178,24 +180,27 @@ const Navbar: React.FC<NavbarProps> = () => {
 
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3">
-              {navigation.map((item) => (
-                <Disclosure.Button
-                  key={item.name}
-                  as={Link}
-                  href={item.href}
-                  className={clsx(
-                    router.pathname == item.href
-                      ? "text-primary-500"
-                      : "hover:text-primary-500",
-                    "block rounded-md px-3 py-2 text-base font-medium"
-                  )}
-                  aria-current={
-                    router.pathname == item.href ? "page" : undefined
-                  }
-                >
-                  {item.name}
-                </Disclosure.Button>
-              ))}
+              {navigation.map(
+                (item) =>
+                  ((user && !item.hideIfAuth) || !user) && (
+                    <Disclosure.Button
+                      key={item.name}
+                      as={Link}
+                      href={item.href}
+                      className={clsx(
+                        router.pathname == item.href
+                          ? "text-primary-500"
+                          : "hover:text-primary-500",
+                        "block rounded-md px-3 py-2 text-base font-medium"
+                      )}
+                      aria-current={
+                        router.pathname == item.href ? "page" : undefined
+                      }
+                    >
+                      {item.name}
+                    </Disclosure.Button>
+                  )
+              )}
             </div>
           </Disclosure.Panel>
         </>

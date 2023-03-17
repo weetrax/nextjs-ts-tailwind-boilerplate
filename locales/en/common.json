@@ -3,7 +3,18 @@
     "Portfolio": "Portfolio",
     "Welcome_home": "Welcome to the Home page.",
     "Portfolio_home": "Welcome to the Portfolio page.",
+    "Login_home": "Welcome to the Login page",
     "My_profile": "My profile",
     "Settings": "Settings",
-    "Signout": "Sign out"
+    "Signout": "Sign out",
+    "Login": "Login",
+    "Login_description": "Login to your account to continue !",
+    "Login_noAccount?": "Doesn't have an account ?",
+    "Email": "E-mail",
+    "Password": "Password",
+    "PasswordConfirm": "Confirm password",
+    "PasswordForgot?": "Forgot your password ?",
+    "ChooseCountry": "Choose a country",
+    "NoCountriesFound": "No countries found",
+    "LoadingCountries": "Loading countries..."
   }

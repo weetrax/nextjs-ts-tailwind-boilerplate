@@ -1,10 +1,11 @@
 import Container from "@/components/Layout/Container";
 import Head from "next/head";
 import useTranslation from "next-translate/useTranslation";
+import { useCurrentUser } from "@/lib/hooks/useCurrentUser";
 
 export default function Home() {
   const { t } = useTranslation("common");
-
+  const { user } = useCurrentUser();
   return (
     <>
       <Head>
@@ -15,6 +16,7 @@ export default function Home() {
       </Head>
       <Container>
         <p>{t("Welcome_home")}</p>
+        {user && <div>logged as: {user.username}</div>}
       </Container>
     </>
   );

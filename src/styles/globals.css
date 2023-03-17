@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* react select override */
+@layer components {
+    .my-react-select-container .my-react-select__control {
+        @apply bg-white dark:bg-neutral-700 border border-gray-300 dark:border-neutral-600;
+    }
+
+    .my-react-select-container .my-react-select__control input, .my-react-select-container .my-react-select__control .my-react-select__placeholder  {
+        @apply !text-black dark:!text-white;
+    }
+
+    .my-react-select-container .my-react-select__control {
+        @apply bg-white dark:bg-neutral-700;
+    }
+    .my-react-select-container .my-react-select__control .my-react-select__single-value {
+        @apply text-black dark:text-white;
+    }
+}
