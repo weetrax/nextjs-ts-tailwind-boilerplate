@@ -12,7 +12,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <CurrentUserProvider>
         <Toaster position="top-center" reverseOrder={false} />
         <NextNprogress
-          color="#6466f1"
+          color="#0097b2"
           startPosition={0.3}
           stopDelayMs={200}
           height={3}

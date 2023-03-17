@@ -5,7 +5,7 @@ import { PropsWithChildren } from "react";
 
 const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
-    <div className="bg-gray-50 dark:bg-neutral-800 text-black dark:text-white flex flex-col min-h-screen justify-between">
+    <div className="bg-gray-50 dark:bg-dark-600 text-black dark:text-white flex flex-col min-h-screen justify-between">
       <header className="flex-none">
         <Navbar />
       </header>

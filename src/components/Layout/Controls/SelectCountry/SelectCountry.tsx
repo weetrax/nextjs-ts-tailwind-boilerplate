@@ -27,7 +27,7 @@ const selectStyles:
     color: "black",
     borderColor: "rgb(212 212 212)",
     "&:hover": {
-      borderColor: "#6466f1",
+      borderColor: "#0097b2",
     },
   }),
   menu: (base) => ({
@@ -36,11 +36,11 @@ const selectStyles:
   }),
   option: (base, { isFocused, isSelected }) => ({
     ...base,
-    background: isFocused ? "#6466f1" : isSelected ? "#6466f1" : undefined,
+    background: isFocused ? "#0097b2" : isSelected ? "#0097b2" : undefined,
     zIndex: 1,
     color: "black",
     "&:hover": {
-      background: "#8385f4",
+      background: "#33acc1",
     },
   }),
 };
