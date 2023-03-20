@@ -8,7 +8,7 @@ import "@/styles/globals.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider attribute="class">
+    <ThemeProvider enableSystem={false} attribute="class">
       <CurrentUserProvider>
         <Toaster position="top-center" reverseOrder={false} />
         <NextNprogress
