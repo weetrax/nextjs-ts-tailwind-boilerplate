@@ -20,7 +20,7 @@ const InputText = React.forwardRef<HTMLInputElement, InputTextProps>(
           "dark:focus:border-red-500 focus:border-red-500";
 
     let classname = clsx(
-      "border border-gray-300 hover:border-primary-500 dark:hover:border-primary-500 dark:border-dark-700 px-3 py-2 rounded-xl text-black dark:text-white bg-white dark:bg-dark-450 focus:outline-none dark:focus:border-primary-500 focus:border-primary-500 duration-200 transition-colors ease-in-out",
+      "border border-gray-300 hover:border-primary-500 dark:hover:border-primary-500 dark:border-dark-400 px-3 py-2 rounded-xl text-black dark:text-white bg-white dark:bg-dark-450 focus:outline-none dark:focus:border-primary-500 focus:border-primary-500 duration-200 transition-colors ease-in-out",
       v,
       additionnalClassname
     );
