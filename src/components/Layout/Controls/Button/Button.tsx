@@ -18,8 +18,8 @@ const Button: React.FC<ButtonProps> = ({
   let classname = clsx(
     "px-3 py-2 rounded-xl",
     shape === "default"
-      ? "bg-primary-500 hover:bg-primary-400 text-white disabled:text-gray-300"
-      : "border border-primary-500 hover:border-primary-400 disabled:text-gray-300",
+      ? "bg-primary-500 hover:bg-primary-400 text-white dark:disabled:text-gray-300 disabled:text-gray-200"
+      : "border border-primary-500 hover:border-primary-400 disabled:text-gray-300 disabled:text-gray-400",
     "w-full flex items-center justify-center transition-colors duration-200 ease-in-out",
     additionnalClassname
   );
