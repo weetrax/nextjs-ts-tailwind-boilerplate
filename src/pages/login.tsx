@@ -115,8 +115,12 @@ const LoginPage: NextPage = () => {
                     </div>
                   </div>
                   <div>
-                    <Button disabled={loading} type={"submit"}>
-                      {t("Login")} {loading && <>...</>}
+                    <Button
+                      disabled={loading}
+                      loading={loading}
+                      type={"submit"}
+                    >
+                      {t("Login")}
                     </Button>
                   </div>
                 </form>
