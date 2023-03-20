@@ -7,7 +7,7 @@
 /* react select override */
 @layer components {
     .my-react-select-container .my-react-select__control {
-        @apply bg-white dark:bg-dark-500 hover:!border-primary-500 border border-gray-300 dark:border-dark-800 duration-200 transition-colors ease-in-out;
+        @apply bg-white dark:bg-dark-450 hover:!border-primary-500 border border-gray-300 dark:border-dark-800 duration-200 transition-colors ease-in-out;
     }
 
     .my-react-select-container .my-react-select__control input, .my-react-select-container .my-react-select__control .my-react-select__placeholder  {
@@ -15,7 +15,7 @@
     }
 
     .my-react-select-container .my-react-select__control {
-        @apply bg-white dark:bg-dark-500;
+        @apply bg-white dark:bg-dark-450;
     }
     .my-react-select-container .my-react-select__control .my-react-select__single-value {
         @apply text-black dark:text-white;
