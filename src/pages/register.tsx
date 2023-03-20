@@ -25,7 +25,7 @@ enum StepEnum {
 const Register: NextPage = () => {
   /* Hooks */
   const { user, setUser } = useCurrentUser();
-
+  const { t } = useTranslation("common");
   /* States */
   const [step, setStep] = useState<number>(StepEnum.INFO);
   const [username, setUsername] = useState<string>("");
@@ -103,14 +103,14 @@ const Register: NextPage = () => {
         <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-20 xl:px-24">
           <div className="mx-auto w-full max-w-sm lg:w-96">
             <div className="text-center">
-              <h2 className="text-3xl font-extrabold">S{"'"}inscrire</h2>
+              <h2 className="text-3xl font-extrabold">{t("CreateAccount")}</h2>
               <p>
-                Inscrivez-vous pour profiter de toutes nos fonctionnalités !{" "}
+                {t("CreateAccount_description")}{" "}
                 <Link
                   href={routes.login}
                   className="font-medium text-primary-500 hover:text-primary-400 transition-colors duration-200 ease-in-out"
                 >
-                  Vous avez déjà un compte ?
+                  {t("Register_alreadyAnAccount?")}
                 </Link>
               </p>
             </div>
@@ -176,7 +176,7 @@ const Step1: React.FC<Step1Props> = ({
   setPassword,
 }) => {
   const [loading, setLoading] = useState<boolean>(false);
-  const { t } = useTranslation();
+  const { t } = useTranslation("common");
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -239,13 +239,13 @@ const Step1: React.FC<Step1Props> = ({
             href={routes.login}
             className="font-medium text-primary-500 hover:text-primary-400 transition-colors duration-200 ease-in-out"
           >
-            Vous avez déjà un compte ?
+            {t("Register_alreadyAnAccount?")}
           </Link>
         </div>
       </div>
 
       <div>
-        <Button disabled={loading} type={"submit"}>
+        <Button disabled={loading} loading={loading} type={"submit"}>
           {loading ? "Inscription en cours..." : "S'inscrire"}
         </Button>
       </div>
@@ -272,7 +272,11 @@ const Step2: React.FC<Step2Props> = ({
   setCountry,
   formHandler,
   setUser,
+  step,
+  setStep,
 }) => {
+  const { t } = useTranslation("common");
+
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -295,6 +299,7 @@ const Step2: React.FC<Step2Props> = ({
         label="Pays"
         onChange={(option: any) => setCountry(option)}
         value={country}
+        isClearable={false}
       />
       <InputText
         type={"text"}
@@ -306,9 +311,12 @@ const Step2: React.FC<Step2Props> = ({
         onChange={(e) => setCity(e.target.value)}
         additionnalClassname="w-full"
       />
-      <div>
-        <Button type={"submit"} disabled={loading}>
-          {loading ? "Validation..." : "Valider"}
+      <div className="flex gap-2">
+        <Button shape="outline" type="button" onClick={() => setStep(step - 1)}>
+          {t("Back")}
+        </Button>
+        <Button type={"submit"} loading={loading} disabled={loading}>
+          {t("Validate")}
         </Button>
       </div>
     </form>
