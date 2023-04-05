@@ -1,10 +1,10 @@
 import clsx from "clsx";
-import Container from "@/components/Layout/Container";
 import Link from "next/link";
 import PropTypes from "prop-types";
 import React, { ChangeEvent, Fragment, useState } from "react";
 import useTranslation from "next-translate/useTranslation";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { LayoutContainer } from "../Container/Container";
 import { routes } from "@/routes";
 import { useCurrentUser } from "@/lib/hooks/useCurrentUser";
 import { useRouter } from "next/router";
@@ -57,10 +57,10 @@ const Navbar: React.FC<NavbarProps> = () => {
 
   /* Render */
   return (
-    <Disclosure as="nav" className="bg-white dark:bg-dark-700">
+    <Disclosure as="nav" className={"backdrop-filter backdrop-blur"}>
       {({ open }) => (
         <>
-          <Container>
+          <LayoutContainer>
             <div className="relative flex h-16 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
@@ -177,7 +177,7 @@ const Navbar: React.FC<NavbarProps> = () => {
                 </div>
               </div>
             </div>
-          </Container>
+          </LayoutContainer>
 
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3">
