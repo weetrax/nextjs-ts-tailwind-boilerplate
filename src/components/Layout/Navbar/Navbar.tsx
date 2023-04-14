@@ -57,7 +57,7 @@ const Navbar: React.FC<NavbarProps> = () => {
 
   /* Render */
   return (
-    <Disclosure as="nav" className={"backdrop-filter backdrop-blur"}>
+    <Disclosure as="nav">
       {({ open }) => (
         <>
           <LayoutContainer>
@@ -96,9 +96,9 @@ const Navbar: React.FC<NavbarProps> = () => {
                             href={item.href}
                             className={clsx(
                               router.pathname == item.href
-                                ? "text-primary-500"
-                                : "hover:text-primary-500",
-                              "rounded-md px-3 py-2 text-sm font-medium transition-colors duration-150 ease-in-out"
+                                ? "underline"
+                                : "hover:underline",
+                              "dark:text-black text-black rounded-md px-3 py-2 text-sm font-medium transition-colors duration-150 ease-in-out"
                             )}
                             aria-current={
                               router.pathname == item.href ? "page" : undefined
