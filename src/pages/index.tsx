@@ -29,7 +29,7 @@ export default function Home() {
 
         <div className="grid grid-cols-2 grid-rows-1 gap-x-10 gap-y-10 md:gap-y-0 mt-10">
           <div className="col-span-2 md:col-span-1">
-            <div className="bg-red-100 h-96 border rounded-2xl border-gray-200 dark:border-dark-400">
+            <div className="bg-red-100 h-96 md:h-full border rounded-2xl border-gray-200 dark:border-dark-400">
               <div className="p-4">
                 <div>A propos</div>
               </div>
