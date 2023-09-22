@@ -1,11 +1,9 @@
 import Container from "@/components/Layout/Container";
 import Head from "next/head";
 import useTranslation from "next-translate/useTranslation";
-import { useCurrentUser } from "@/lib/hooks/useCurrentUser";
 
 export default function Home() {
   const { t } = useTranslation("common");
-  const { user } = useCurrentUser();
   return (
     <>
       <Head>
@@ -14,19 +12,18 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Container>
-        <div className="border-b-[2px] border-l-[2px] border-r-[2px] border-gray-200 dark:border-dark-400 rounded-b-2xl pt-[100px] sticky top-[calc(-32rem)] md:top-[calc(-32rem)] px-4 -mt-[100px] background--custom">
-          <div className="h-[30rem] flex items-center justify-between">
-            <div>
-              <h1 className="uppercase text-3xl font-bold">
-                Your adventure starts here
-              </h1>
-              <p>{t("Welcome_home")}</p>
-              {user && <div>logged as: {user.username}</div>}
-            </div>
-          </div>
+      <div className="relative h-screen -mt-16">
+        <img
+          src="https://les2travelers.com/wp-content/uploads/2023/09/cropped-cropped-cropped-Japan-mt.-fuji.png"
+          alt="Image de fond"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black opacity-50"></div>
+        <div className="absolute inset-0 flex items-center justify-center text-white text-3xl font-bold">
+          BIENVENUE SUR LES2TRAVELERS
         </div>
-
+      </div>
+      <Container>
         <div className="grid grid-cols-2 grid-rows-1 gap-x-10 gap-y-10 md:gap-y-0 mt-10">
           <div className="col-span-2 md:col-span-1">
             <div className="bg-red-100 h-96 md:h-full border rounded-2xl border-gray-200 dark:border-dark-400">

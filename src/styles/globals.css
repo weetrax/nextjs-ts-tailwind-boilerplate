@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 /* duration-200 transition-colors ease-in-out */
+#nprogress .bar {
+  @apply !bg-primary-500;
+}
 
 /* react select override */
 @layer components {

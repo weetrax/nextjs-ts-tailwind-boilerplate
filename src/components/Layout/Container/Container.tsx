@@ -7,14 +7,6 @@ const Container: React.FC<React.PropsWithChildren> = ({ children }) => {
   );
 };
 
-export const LayoutContainer: React.FC<React.PropsWithChildren> = ({
-  children,
-}) => {
-  return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-10">{children}</div>
-  );
-};
-
 Container.propTypes = {
   //
 };

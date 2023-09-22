@@ -1,9 +1,3 @@
-declare module "iron-session" {
-  interface IronSessionData {
-    user?: IUser;
-  }
-}
-
 export interface IUser {
   username: string;
   email: string;

@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { LayoutContainer } from "../Container/Container";
+import Container from "../Container/Container";
 
 type FooterProps = {
   //
@@ -9,7 +9,7 @@ type FooterProps = {
 const Footer: React.FC<FooterProps> = () => {
   return (
     <div className="py-6">
-      <LayoutContainer>
+      <Container>
         <div className="flex flex-col md:flex-row gap-2 justify-between items-center">
           <a
             href="https://twitter.com/weetrax"
@@ -47,7 +47,7 @@ const Footer: React.FC<FooterProps> = () => {
             </a>
           </div>
         </div>
-      </LayoutContainer>
+      </Container>
     </div>
   );
 };
